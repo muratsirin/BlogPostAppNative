@@ -4,7 +4,7 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 import { PostsScreen } from "../../features/screens/posts.screen";
-// import { PostDetailScreen } from "../../features/posts/screens/post-detail.screen";
+import { PostDetailScreen } from "../../features/screens/post-detail.screen";
 // import { CommentsScreen } from "../../features/posts/screens/comments.screen";
 
 const PostsStack = createStackNavigator();
@@ -27,10 +27,10 @@ export const PostsNavigator = () => {
     <PostsStack.Navigator>
       <PostsStack.Group screenOptions={screenOptions}>
         <PostsStack.Screen name="PostsScreen" component={PostsScreen} />
-        {/* <PostsStack.Screen
+        <PostsStack.Screen
           name="PostDetailScreen"
           component={PostDetailScreen}
-        /> */}
+        />
       </PostsStack.Group>
       {/* <PostsStack.Group screenOptions={screenOptions}>
         <PostsStack.Screen name="Comments" component={CommentsScreen} />

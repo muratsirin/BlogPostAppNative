@@ -5,8 +5,9 @@ import { SearchBar } from "../../components/searchbar/search-bar.component";
 import PostInfoCard from "../components/card";
 import { PostsContext } from "../../services/posts/posts.context";
 import { LoadingSpinner } from "../../components/utility/loading-spinner.component";
+import { TouchableOpacity } from "react-native";
 
-export const PostsScreen = () => {
+export const PostsScreen = ({ navigation }) => {
   const { posts, isLoading, error } = useContext(PostsContext);
 
   return (
@@ -28,7 +29,15 @@ export const PostsScreen = () => {
           <FlatList
             data={posts}
             renderItem={({ item }) => {
-              return <PostInfoCard key={item.id} post={item} />;
+              return (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("PostDetailScreen", { post: item })
+                  }
+                >
+                  <PostInfoCard key={item.id} post={item} />
+                </TouchableOpacity>
+              );
             }}
             keyExtractor={(item) => item.id}
           />

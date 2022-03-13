@@ -1,17 +1,13 @@
 import React from "react";
-import { HStack, VStack, Text } from "native-base";
+import { HStack, VStack, Text, Icon } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
-import { StyleSheet } from "react-native";
 
 const SocialIcon = ({ icon, text }) => {
   return (
     <VStack alignItems="center">
-      <MaterialIcons style={styles.iconColor} name={icon} size={30} />
-      <Text
-        color="coolGray.600"
-        _dark={{ color: "warmGray.400" }}
-        fontWeight="400"
-      >
+      <Icon color="indigo.600" size="md" as={<MaterialIcons name={icon} />} />
+
+      <Text color="white" fontWeight="400">
         {text}
       </Text>
     </VStack>
@@ -27,9 +23,3 @@ export const PostSocial = ({ likeCount, commentCount }) => {
     </HStack>
   );
 };
-
-const styles = StyleSheet.create({
-  iconColor: {
-    color: "gray",
-  },
-});
