@@ -1,7 +1,7 @@
 import React from "react";
 import { HStack, Avatar, Text, VStack } from "native-base";
 
-export const Author = () => {
+export const Author = ({ name, surname, postDate }) => {
   return (
     <HStack padding="1" space={2}>
       <Avatar
@@ -11,14 +11,16 @@ export const Author = () => {
         }}
       />
       <VStack>
-        <Text fontSize="md">Murat Şirin</Text>
+        <Text fontSize="md">
+          {name} {surname}
+        </Text>
         <HStack alignItems="center">
           <Text
             color="coolGray.600"
             _dark={{ color: "warmGray.400" }}
             fontWeight="400"
           >
-            6 mins ago
+            {postDate}
           </Text>
         </HStack>
       </VStack>

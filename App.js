@@ -1,6 +1,6 @@
 import React from "react";
-import { NativeBaseProvider, extendTheme, VStack } from "native-base";
-import { PostsScreen } from "./src/features/screens/posts.screen";
+import { NativeBaseProvider, extendTheme } from "native-base";
+import { Navigation } from "./src/infrastructure/navigation";
 
 // Define the config
 const config = {
@@ -14,14 +14,7 @@ export const theme = extendTheme({ config });
 export default function App() {
   return (
     <NativeBaseProvider theme={theme}>
-      <VStack
-        _dark={{ bg: "dark.50" }}
-        _light={{ bg: "blueGray.50" }}
-        px={4}
-        flex={1}
-      >
-        <PostsScreen />
-      </VStack>
+      <Navigation />
     </NativeBaseProvider>
   );
 }

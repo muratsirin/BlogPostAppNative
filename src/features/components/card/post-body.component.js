@@ -1,18 +1,15 @@
 import React from "react";
 import { Stack, Text, Heading } from "native-base";
 
-export const PostBody = () => {
+export const PostBody = ({ title, content }) => {
   return (
     <>
       <Stack space={2}>
         <Heading size="md" ml="-1">
-          The Garden City
+          {title}
         </Heading>
       </Stack>
-      <Text fontWeight="400">
-        Bengaluru (also called Bangalore) is the center of India's high-tech
-        industry. The city is also known for its parks and nightlife.
-      </Text>
+      <Text fontWeight="400">{content}</Text>
     </>
   );
 };

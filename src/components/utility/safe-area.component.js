@@ -2,5 +2,5 @@ import React from "react";
 import { Box } from "native-base";
 
 export const SafeArea = () => {
-  return <Box safeAreaTop="16" />;
+  return <Box safeAreaTop="12" />;
 };
