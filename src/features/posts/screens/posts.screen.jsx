@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { SafeArea } from "../../components/utility/safe-area.component";
+import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Box, FlatList } from "native-base";
-import { SearchBar } from "../../components/searchbar/search-bar.component";
-import PostInfoCard from "../components/card";
-import { PostsContext } from "../../services/posts/posts.context";
-import { LoadingSpinner } from "../../components/utility/loading-spinner.component";
+import { SearchBar } from "../../../components/searchbar/search-bar.component";
+import { PostInfoCard } from "../components/post-info-card/post-info-card.component";
+import { PostsContext } from "../../../services/posts/posts.context";
+import { LoadingSpinner } from "../../../components/utility/loading-spinner.component";
 import { TouchableOpacity } from "react-native";
+import { CommentSection } from "../components/comment/comment-section.component";
 
 export const PostsScreen = ({ navigation }) => {
   const { posts, isLoading, error } = useContext(PostsContext);
@@ -35,7 +36,11 @@ export const PostsScreen = ({ navigation }) => {
                     navigation.navigate("PostDetailScreen", { post: item })
                   }
                 >
-                  <PostInfoCard key={item.id} post={item} />
+                  <PostInfoCard
+                    key={item.id}
+                    post={item}
+                    navigation={navigation}
+                  />
                 </TouchableOpacity>
               );
             }}

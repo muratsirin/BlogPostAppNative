@@ -24,6 +24,7 @@ export const postsTransform = ({ results = [] }) => {
       content: post.post_content,
       likeCount: post.like_count,
       id: post.post_id,
+      commentId: post.comments.comment_id,
     };
   });
 

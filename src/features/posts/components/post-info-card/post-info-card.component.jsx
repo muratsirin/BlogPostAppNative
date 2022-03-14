@@ -1,10 +1,11 @@
 import React from "react";
+import { Box, Divider, Stack } from "native-base";
 import { Author } from "../author.component";
-import { PostDetailBody } from "./post-detail-body.component";
+import { PostImage } from "../post-image.component";
+import { PostBody } from "./post-body.component";
 import { PostSocial } from "../post-social.component";
-import { Divider, ScrollView } from "native-base";
 
-const PostDetail = ({ post = {} }) => {
+export const PostInfoCard = ({ post = {}, navigation }) => {
   const {
     author = { name: "Murat", surname: "Şirin" },
     title = "What is Lorem Ipsum?",
@@ -19,14 +20,34 @@ const PostDetail = ({ post = {} }) => {
   } = post;
 
   return (
-    <ScrollView>
-      <Author name={author.name} surname={author.surname} postDate={postDate} />
-      <Divider my="2" />
-      <PostDetailBody title={title} photo={photos[0]} content={content} />
-      <Divider my="2" />
-      <PostSocial likeCount={likeCount} commentCount={commentCount} />
-    </ScrollView>
+    <Box paddingTop="4" alignItems="center">
+      <Box
+        rounded="lg"
+        overflow="hidden"
+        borderColor="coolGray.200"
+        borderWidth="1"
+        _dark={{ borderColor: "coolGray.600", backgroundColor: "dark.100" }}
+      >
+        <Box>
+          <Author
+            name={author.name}
+            surname={author.surname}
+            postDate={postDate}
+          />
+          <Divider my="1" />
+          <PostImage photo={photos[0]} />
+        </Box>
+        <Stack p="4" space={3}>
+          <PostBody title={title} content={content} />
+          <Divider my="1" />
+          <PostSocial
+            likeCount={likeCount}
+            commentCount={commentCount}
+            navigation={navigation}
+            comments={comments}
+          />
+        </Stack>
+      </Box>
+    </Box>
   );
 };
-
-export default PostDetail;
