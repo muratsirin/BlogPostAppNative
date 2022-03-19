@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { AuthButton } from "../components/form/auth-button.component";
 import { FormHeading } from "../components/form/form-heading.component";
 import { FormControl } from "../components/form/form-control.component";
 import { FormLink } from "../components/form/form-link.component";
 import { Box, Text, VStack, HStack, Center } from "native-base";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 export const SigninScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { onSignIn, isLoading, error } = useContext(AuthenticationContext);
+
   return (
     <Box
       safeArea
@@ -18,10 +23,22 @@ export const SigninScreen = () => {
         <Box w="90%" maxW="290">
           <FormHeading />
           <VStack space={3} mt="5">
-            <FormControl label="Email" />
-            <FormControl label="Password" type="password" />
+            <FormControl
+              label="Email"
+              value={email}
+              onChangeText={(value) => setEmail(value)}
+            />
+            <FormControl
+              label="Password"
+              type="password"
+              value={password}
+              onChangeText={(value) => setPassword(value)}
+            />
             <FormLink text="Forget Password" alignSelf="flex-end" />
-            <AuthButton text="Sign in" />
+            <AuthButton
+              text="Sign in"
+              onPress={() => onSignIn(email, password)}
+            />
           </VStack>
           <HStack mt="6" justifyContent="center">
             <Text>I'm a new user. </Text>

@@ -16,7 +16,7 @@ export const ProfileScreen = ({ navigation }) => {
     >
       <SafeArea />
       <Stack space={4}>
-        <Text>For see your profile please login or register</Text>
+        <Text>For see your profile please login or register </Text>
         <AuthButton
           text="Sign in"
           onPress={() => navigation.navigate("SigninScreen")}

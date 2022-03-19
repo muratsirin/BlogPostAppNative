@@ -6,9 +6,9 @@ import { PostsContextProvider } from "../../services/posts/posts.context";
 import { SafeArea } from "../../components/utility/safe-area.component";
 import { Text, VStack } from "native-base";
 import { BottomNavigationBar } from "../../components/navigation-bar/bottom-navigation-bar.component";
-import { ProfileScreen } from "../../services/profile/screens/profile.screen";
-import { SigninScreen } from "../../services/profile/screens/signin.screen";
-import { SignupScreen } from "../../services/profile/screens/signup.screen";
+import { ProfileScreen } from "../../features/profile/screens/profile.screen";
+import { SigninScreen } from "../../features/profile/screens/signin.screen";
+import { SignupScreen } from "../../features/profile/screens/signup.screen";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
