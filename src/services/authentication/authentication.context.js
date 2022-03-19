@@ -49,12 +49,15 @@ export const AuthenticationContextProvider = ({ children }) => {
   };
 
   const onSignOut = () => {
+    setIsLoading(true);
     signOutRequest()
       .then(() => {
+        setIsLoading(false);
         setUser(null);
         setError(null);
       })
       .catch((e) => {
+        setIsLoading(false);
         setError(e.toString());
       });
   };

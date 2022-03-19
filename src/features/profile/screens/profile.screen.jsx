@@ -1,9 +1,13 @@
-import React from "react";
-import { Box, Text, Stack } from "native-base";
-import { SafeArea } from "../../../components/utility/safe-area.component";
-import { AuthButton } from "../components/form/auth-button.component";
+import React, { useContext } from "react";
+import { Box, Text } from "native-base";
+import { ProfileInfo } from "../components/profile-screen/profile-info.component";
+import { Auth } from "../components/auth/auth.component";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 export const ProfileScreen = ({ navigation }) => {
+  const { user } = useContext(AuthenticationContext);
+
+  console.log(user);
   return (
     <Box
       _dark={{ bg: "dark.50" }}
@@ -11,21 +15,9 @@ export const ProfileScreen = ({ navigation }) => {
       px={2}
       py={2}
       flex={1}
-      alignItems="center"
       justifyContent="center"
     >
-      <SafeArea />
-      <Stack space={4}>
-        <Text>For see your profile please login or register </Text>
-        <AuthButton
-          text="Sign in"
-          onPress={() => navigation.navigate("SigninScreen")}
-        />
-        <AuthButton
-          text="Sign up"
-          onPress={() => navigation.navigate("SignupScreen")}
-        />
-      </Stack>
+      {user ? <ProfileInfo /> : <Auth navigation={navigation} />}
     </Box>
   );
 };
