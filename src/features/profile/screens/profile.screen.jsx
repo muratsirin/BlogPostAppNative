@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
-import { Box, Text } from "native-base";
+import { Box } from "native-base";
 import { ProfileInfo } from "../components/profile-screen/profile-info.component";
 import { Auth } from "../components/auth/auth.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 export const ProfileScreen = ({ navigation }) => {
-  const { user } = useContext(AuthenticationContext);
+  const { onSignOut, user, isLoading, error } = useContext(
+    AuthenticationContext
+  );
 
-  console.log(user);
   return (
     <Box
       _dark={{ bg: "dark.50" }}
@@ -15,9 +16,19 @@ export const ProfileScreen = ({ navigation }) => {
       px={2}
       py={2}
       flex={1}
+      alignItems={!user ? "center" : "stretch"}
       justifyContent="center"
     >
-      {user ? <ProfileInfo /> : <Auth navigation={navigation} />}
+      {user ? (
+        <ProfileInfo
+          onSignOut={onSignOut}
+          user={user}
+          isLoading={isLoading}
+          error={error}
+        />
+      ) : (
+        <Auth navigation={navigation} />
+      )}
     </Box>
   );
 };

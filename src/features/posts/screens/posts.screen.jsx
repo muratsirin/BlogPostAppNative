@@ -6,7 +6,6 @@ import { PostInfoCard } from "../components/post-info-card/post-info-card.compon
 import { PostsContext } from "../../../services/posts/posts.context";
 import { LoadingSpinner } from "../../../components/utility/loading-spinner.component";
 import { TouchableOpacity } from "react-native";
-import { CommentSection } from "../components/comment/comment-section.component";
 
 export const PostsScreen = ({ navigation }) => {
   const { posts, isLoading, error } = useContext(PostsContext);

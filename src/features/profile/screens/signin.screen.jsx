@@ -6,10 +6,17 @@ import { FormLink } from "../components/form/form-link.component";
 import { Box, Text, VStack, HStack, Center } from "native-base";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
-export const SigninScreen = () => {
+export const SigninScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { onSignIn, isLoading, error } = useContext(AuthenticationContext);
+
+  const onPress = () => {
+    onSignIn(email, password);
+    if (!error) {
+      navigation.navigate("Profile");
+    }
+  };
 
   return (
     <Box
@@ -37,7 +44,8 @@ export const SigninScreen = () => {
             <FormLink text="Forget Password" alignSelf="flex-end" />
             <AuthButton
               text="Sign in"
-              onPress={() => onSignIn(email, password)}
+              isLoading={isLoading}
+              onPress={onPress}
             />
           </VStack>
           <HStack mt="6" justifyContent="center">

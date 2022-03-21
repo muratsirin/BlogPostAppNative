@@ -6,12 +6,19 @@ import { FormLink } from "../components/form/form-link.component";
 import { Box, Text, VStack, HStack, Center } from "native-base";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
-export const SignupScreen = () => {
+export const SignupScreen = ({ navigation }) => {
   const [name, setName] = useState(null);
   const [surname, setSurname] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const { onSignUp, isLoading, error } = useContext(AuthenticationContext);
+
+  const onPress = () => {
+    onSignUp(name, surname, email, password);
+    if (!error) {
+      navigation.navigate("Profile");
+    }
+  };
 
   return (
     <Box
@@ -50,7 +57,8 @@ export const SignupScreen = () => {
             />
             <AuthButton
               text="Sign up"
-              onPress={() => onSignUp(name, surname, email, password)}
+              isLoading={isLoading}
+              onPress={onPress}
             />
           </VStack>
           <HStack mt="6" justifyContent="center">
