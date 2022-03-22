@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { Box, FlatList } from "native-base";
+import { Box, FlatList, Fab, Icon } from "native-base";
 import { SearchBar } from "../../../components/searchbar/search-bar.component";
 import { PostInfoCard } from "../components/post-info-card/post-info-card.component";
 import { PostsContext } from "../../../services/posts/posts.context";
 import { LoadingSpinner } from "../../../components/utility/loading-spinner.component";
+import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
 export const PostsScreen = ({ navigation }) => {
@@ -26,6 +27,16 @@ export const PostsScreen = ({ navigation }) => {
       ) : (
         <>
           <SearchBar />
+          <Fab
+            renderInPortal={false}
+            colorScheme="indigo"
+            shadow={2}
+            size="sm"
+            icon={
+              <Icon color="white" as={MaterialIcons} name="edit" size="sm" />
+            }
+            onPress={() => navigation.navigate("AddPost")}
+          />
           <FlatList
             data={posts}
             renderItem={({ item }) => {

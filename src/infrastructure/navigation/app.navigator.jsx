@@ -9,6 +9,9 @@ import { BottomNavigationBar } from "../../components/navigation-bar/bottom-navi
 import { ProfileScreen } from "../../features/profile/screens/profile.screen";
 import { SigninScreen } from "../../features/profile/screens/signin.screen";
 import { SignupScreen } from "../../features/profile/screens/signup.screen";
+import { AddPostScreen } from "../../features/posts/screens/add-post.screen";
+import { appScreenOptions } from "./screen-options";
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -46,17 +49,11 @@ const Favourites = () => {
   );
 };
 
-const screenOptions = ({ route }) => {
-  return {
-    headerShown: false,
-  };
-};
-
 const Tabs = () => {
   return (
     <Tab.Navigator
       tabBar={(props) => <BottomNavigationBar {...props} />}
-      screenOptions={screenOptions}
+      screenOptions={{ headerShown: false }}
     >
       <Tab.Screen name="Home" component={PostsNavigator} />
       <Tab.Screen name="Discover" component={Discover} />
@@ -69,10 +66,15 @@ const Tabs = () => {
 export const AppNavigator = () => {
   return (
     <PostsContextProvider>
-      <Stack.Navigator screenOptions={screenOptions}>
-        <Stack.Screen name="Tabs" component={Tabs} />
-        <Stack.Screen name="SigninScreen" component={SigninScreen} />
-        <Stack.Screen name="SignupScreen" component={SignupScreen} />
+      <Stack.Navigator>
+        <Stack.Group screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Tabs" component={Tabs} />
+        </Stack.Group>
+        <Stack.Group screenOptions={appScreenOptions}>
+          <Stack.Screen name="SigninScreen" component={SigninScreen} />
+          <Stack.Screen name="SignupScreen" component={SignupScreen} />
+          <Stack.Screen name="AddPost" component={AddPostScreen} />
+        </Stack.Group>
       </Stack.Navigator>
     </PostsContextProvider>
   );
