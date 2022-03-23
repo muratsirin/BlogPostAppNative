@@ -27,6 +27,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     signInRequest(email, password)
       .then((u) => {
         setUser(u);
+        console.log(user);
         setIsLoading(false);
       })
       .catch((e) => {

@@ -65,17 +65,15 @@ const Tabs = () => {
 
 export const AppNavigator = () => {
   return (
-    <PostsContextProvider>
-      <Stack.Navigator>
-        <Stack.Group screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Tabs" component={Tabs} />
-        </Stack.Group>
-        <Stack.Group screenOptions={appScreenOptions}>
-          <Stack.Screen name="SigninScreen" component={SigninScreen} />
-          <Stack.Screen name="SignupScreen" component={SignupScreen} />
-          <Stack.Screen name="AddPost" component={AddPostScreen} />
-        </Stack.Group>
-      </Stack.Navigator>
-    </PostsContextProvider>
+    <Stack.Navigator>
+      <Stack.Group screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Tabs" component={Tabs} />
+      </Stack.Group>
+      <Stack.Group screenOptions={appScreenOptions}>
+        <Stack.Screen name="SigninScreen" component={SigninScreen} />
+        <Stack.Screen name="SignupScreen" component={SignupScreen} />
+        <Stack.Screen name="AddPost" component={AddPostScreen} />
+      </Stack.Group>
+    </Stack.Navigator>
   );
 };

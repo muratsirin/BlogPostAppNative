@@ -11,6 +11,11 @@ import { TouchableOpacity } from "react-native";
 export const PostsScreen = ({ navigation }) => {
   const { posts, isLoading, error } = useContext(PostsContext);
 
+  console.log(
+    posts.map((post) => {
+      console.log(post.data());
+    })
+  );
   return (
     <Box
       _dark={{ bg: "dark.50" }}
@@ -48,7 +53,7 @@ export const PostsScreen = ({ navigation }) => {
                 >
                   <PostInfoCard
                     key={item.id}
-                    post={item}
+                    post={item.data()}
                     navigation={navigation}
                   />
                 </TouchableOpacity>

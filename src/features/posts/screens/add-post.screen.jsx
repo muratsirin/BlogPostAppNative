@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import {
   Box,
@@ -12,8 +12,37 @@ import {
   IconButton,
   AspectRatio,
 } from "native-base";
+import { PostsContext } from "../../../services/posts/posts.context";
+import * as ImagePicker from "expo-image-picker";
 
 export const AddPostScreen = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState();
+  const { addPost, isLoading, error } = useContext(PostsContext);
+
+  const selectImage = async () => {
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permissionResult.granted) {
+      alert("Gallery permission is required for upload an image to your post");
+      return;
+    }
+
+    const pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+    if (pickerResult.cancelled) {
+      return;
+    }
+
+    setImage({ localUri: pickerResult.uri });
+  };
+
+  const onPress = () => {
+    addPost(title, content, image ? image.localUri : "");
+  };
+
   return (
     <Box
       _dark={{ bg: "dark.50" }}
@@ -24,24 +53,36 @@ export const AddPostScreen = () => {
       justifyContent="center"
     >
       <Box alignItems="center" mb="3">
-        {/* <AspectRatio w="100%" ratio={16 / 9}>
-          <Image
-            source={{
-              uri: "https://i4.hurimg.com/i/hurriyet/75/750x422/56ff9829c03c0e4a48aab2f1.jpg",
-            }}
-            alt="Alternate Text"
+        {image ? (
+          <AspectRatio w="100%" ratio={16 / 9}>
+            <Image
+              source={{
+                uri: image.localUri,
+              }}
+              alt="Alternate Text"
+            />
+          </AspectRatio>
+        ) : (
+          <IconButton
+            variant="solid"
+            colorScheme="indigo"
+            _icon={{ as: AntDesign, name: "picture", color: "white" }}
+            onPress={selectImage}
           />
-        </AspectRatio> */}
-        <IconButton
-          variant="solid"
-          colorScheme="indigo"
-          _icon={{ as: AntDesign, name: "picture", color: "white" }}
-        />
+        )}
       </Box>
       <Stack space={3}>
-        <Input size="md" placeholder="What about your post?" />
-        <TextArea h={20} placeholder="Your post content" />
-        <Button colorScheme="indigo">
+        <Input
+          size="md"
+          placeholder="What about your post?"
+          onChangeText={(value) => setTitle(value)}
+        />
+        <TextArea
+          h={20}
+          placeholder="Your post content"
+          onChangeText={(value) => setContent(value)}
+        />
+        <Button colorScheme="indigo" onPress={onPress}>
           <Text fontSize={18}>Save</Text>
         </Button>
       </Stack>
